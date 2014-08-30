@@ -7,3 +7,4 @@ _Please add your informaiton below_
 
 * Benjamin Campbell [benji@benjica.com](mailto:benji@benjica.com)
 * Zachary Falkner [falkzach@gmail.com](mailto:falkzach@gmail.com)
+* Aaron St. George [aaronstgeorge@gmail.com](mailto:aaronstgeorge+school@gmail.com)
