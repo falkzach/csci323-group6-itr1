@@ -6,3 +6,4 @@ An implementation of a sample application described in [CSCI323 - Software Scien
 _Please add your informaiton below_
 
 * Benjamin Campbell [benji@benjica.com](mailto:benji@benjica.com)
+* Zachary Falkner [falkzach@gmail.com](mailto:falkzach@gmail.com)
