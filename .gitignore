@@ -1,0 +1,4 @@
+# No python compiled objects
+*.pyo
+*.pyc
+
