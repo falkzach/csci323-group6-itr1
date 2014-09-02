@@ -9,4 +9,4 @@ _Please add your informaiton below_
 * Zachary Falkner [falkzach@gmail.com](mailto:falkzach@gmail.com)
 * Aaron St. George [aaronstgeorge@gmail.com](mailto:aaronstgeorge+school@gmail.com)
 * Chelsea Carl [chelsea.carl04@gmail.com](mailto:chelsea.carl04@gmail.com)
-* Patrick Tresslar [pat.tresslar@gmail.com}(mailto:pat.tresslar@gmail.com)
+* Patrick Tresslar [pat.tresslar@gmail.com](mailto:pat.tresslar@gmail.com)
