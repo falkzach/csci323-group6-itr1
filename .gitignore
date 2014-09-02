@@ -1,0 +1,5 @@
+# No python compiled objects
+*.pyo
+*.pyc
+
+db.sqlite3
