@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
-from main import views
+from main.views import RecipeCollectionView
 
 urlpatterns = [
-        url(r'^$', views.index, name='index'),
+        url(r'^$', RecipeCollectionView.as_view()),
 ]
