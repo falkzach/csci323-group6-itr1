@@ -33,3 +33,7 @@ class RecipeCollectionView(View):
         '''Handles posts of new recipes from a form'''
 
         return HttpResponse('POST /')
+
+class RecipeResourceView(View):
+    def get(self, request, id=None):
+        return HttpResponse('Would return a single recipe object with id %s' % (id))
