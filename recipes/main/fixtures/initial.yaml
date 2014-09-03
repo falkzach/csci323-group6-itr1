@@ -20,7 +20,6 @@
   fields:
     step: 1
     Description: mix and eat
-
 - model: main.Recipe
   pk: 1
   fields:
