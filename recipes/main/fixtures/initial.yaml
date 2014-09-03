@@ -1,0 +1,38 @@
+- model: main.ingredient
+  pk: 1
+  fields:
+    name: Hamburger
+    unit_of_measure: Pound
+    value_of_measure: 1
+- model: main.ingredient
+  pk: 2
+  fields:
+    name: Taco Seasoning
+    unit_of_measure: Packet
+    value_of_measure: 1
+- model: main.category
+  pk: 1
+  fields:
+    name: Mexican
+    recipes: [1]
+    description: Southern dishes of awesomness
+- model: main.direction
+  pk: 1
+  fields:
+    step: 1
+    recipe: 1
+    description: mix and eat
+- model: main.Recipe
+  pk: 1
+  fields:
+    name: Tacos
+    description: Tasty treat
+    rating: 1
+    ingredients: [1, 2]
+- model: main.recipe
+  pk: 2
+  fields:
+    name: Burritto
+    description: another tasty one
+    rating: 2
+    ingredients: [1, 2]
