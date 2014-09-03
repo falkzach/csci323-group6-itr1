@@ -3,6 +3,8 @@ from django.http import HttpResponse
 
 from django.views.generic.base import View
 
+from main.models import Recipe
+
 # Create your views here.
 
 class RecipeCollectionView(View):
@@ -27,7 +29,7 @@ class RecipeCollectionView(View):
             else:
                 return HttpResponse('Would return list of recipes in ordered by category')
         else:
-            return render(request, 'index.html')
+            return render(request, 'index.html', {'recipes': Recipe.objects.all()})
 
     def post(self, request):
         '''Handles posts of new recipes from a form'''
