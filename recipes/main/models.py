@@ -41,4 +41,4 @@ class Direction(models.Model):
     recipe = models.ForeignKey(Recipe)
 
     def __str__(self):
-        return self.step
+        return str(self.step)
