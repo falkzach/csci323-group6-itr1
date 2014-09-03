@@ -12,12 +12,19 @@ class RecipeCollectionView(View):
     def get(self, request, sort=None, pivot=None):
         ''' The method is responsible for handling collection get requests'''
         
-        recipe_dict = {}
+        resource_dict = {}
         
         if sort == 'ingredient':
-            bucket = Ingredient.objects.all()
+            if pivot:
+                bucket = Ingredient.objects.get(pk=pivot).recipe_set.all()
+            else:
+                bucket = Ingredient.objects.all()
+            
         elif sort == 'category':
-            bucket = Category.objects.all()
+            if pivot:
+                bucket = Ingredient.objects.get(pk=pivot).recipe_set.all()
+            else:
+                bucket = Category.objects.all()
         else:
             # If not sort is specified just get all recipes
             bucket = Recipe.objects.all()
@@ -26,12 +33,12 @@ class RecipeCollectionView(View):
             
             key = drop.name.upper()[0]
 
-            if key not in recipe_dict:
-                recipe_dict[key] = list()
+            if key not in resource_dict:
+                resource_dict[key] = list()
 
-            recipe_dict[key].append(drop)
+            resource_dict[key].append(drop)
 
-        return render(request, 'index.html', {'recipes': recipe_dict, 'title': sort})
+        return render(request, 'index.html', {'resource_collection': resource_dict, 'title': sort})
 
     def post(self, request):
         '''Handles posts of new recipes from a form'''
