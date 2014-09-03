@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 from django.views.generic.base import View
 
-from main.models import Recipe
+from main.models import Recipe, Ingredient
 
 # Create your views here.
 
@@ -11,25 +11,26 @@ class RecipeCollectionView(View):
 
     def get(self, request, sort=None, pivot=None):
         ''' The method is responsible for handling collection get requests'''
-
-        if sort == 'alphabetical':
-            if pivot:
-                return HttpResponse('Would return list of recipes using letter %s' % (pivot))
-            else:
-                return HttpResponse('Would return list of all recipes ordered by letter')
-
-        elif sort == 'ingredient':
-            if pivot:
-                return HttpResponse('Would return list of recipes using ingredient %s' % (pivot))
-            else:
-                return HttpResponse('Would return list of all recipes ordered by ingredient ')
-        elif sort == 'category':
-            if pivot:
-                return HttpResponse('Would return list of recipes using category %s' % (pivot))
-            else:
-                return HttpResponse('Would return list of recipes in ordered by category')
+        
+        recipe_dict = {}
+        
+        if sort == 'ingredient':
+            # Use the ingredeint
+            bucket = Ingredient.objects.all()
         else:
-            return render(request, 'index.html', {'recipes': Recipe.objects.all()})
+            # If not sort is specified just get all recipes
+            bucket = Recipe.objects.all()
+
+        for drop in bucket:
+            
+            key = drop.name.upper()[0]
+
+            if key not in recipe_dict:
+                recipe_dict[key] = list()
+
+            recipe_dict[key].append(drop)
+
+        return render(request, 'index.html', {'recipes': recipe_dict})
 
     def post(self, request):
         '''Handles posts of new recipes from a form'''

@@ -6,16 +6,21 @@
 			<h1>Hello World!</h1>
 			<p>This is an example of how to iterate stuff in templates</p>
 
+			<pre>{{ recipes }}</pre>
+
+			{% for letter, recipe_list in recipes %}
+			<h2>{{letter}}</h2>
 			<table class="table">
 				<tr>
 					<th>Name</th>
 				</tr>
-				{% for recipe in recipes %}
+				{% for recipe in recipe_list %}
 				<tr>
-					<td>{{ recipe.name }}</td>
+					<td>{{recipe.name}}</td>
 				</tr>
 				{% endfor %}
 			</table>
+			{% endfor %}
 
 		</div>
 	</div>

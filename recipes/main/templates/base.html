@@ -5,8 +5,21 @@
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">	
 	</head>
 	<body>
-		<div class="container">
-			{% block content %}{% endblock %}	
+		<div class="container" style="margin-top: 100px;">
+			<div class="row">
+				<div class="col-md-4">
+					<ul class="nav nav-pills nav-stacked">
+						<li class="dropdown-header">Recipes</li>
+						<li class="active"><a href="#">Alphabetical</a></li>
+						<li><a href="#">Ingredients</a></li>
+						<li><a href="#">Category</a></li>
+						<li><a href="#">Add Recipe</a><li>
+					</ul>
+				</div>
+				<div class="col-md-8">
+					{% block content %}{% endblock %}	
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
