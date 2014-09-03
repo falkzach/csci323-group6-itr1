@@ -7,6 +7,9 @@ class Ingredient(models.Model):
     unit_of_measure = models.CharField(max_length=255,)
     value_of_measure = models.CharField(max_length=255,)
 
+    def __str__(self):
+        return self.name
+
 
 class Recipe(models.Model):
 
@@ -27,6 +30,8 @@ class Category(models.Model):
 
     recipes = models.ManyToManyField(Recipe)
 
+    def __str__(self):
+        return self.name
 
 class Direction(models.Model):
 
@@ -34,3 +39,6 @@ class Direction(models.Model):
     description = models.CharField(max_length=2048)
 
     recipe = models.ForeignKey(Recipe)
+
+    def __str__(self):
+        return self.step
