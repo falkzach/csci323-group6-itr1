@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 from django.views.generic.base import View
 
-from main.models import Recipe, Ingredient
+from main.models import Recipe, Ingredient, Category
 
 # Create your views here.
 
@@ -15,8 +15,9 @@ class RecipeCollectionView(View):
         recipe_dict = {}
         
         if sort == 'ingredient':
-            # Use the ingredeint
             bucket = Ingredient.objects.all()
+        elif sort == 'category':
+            bucket = Category.objects.all()
         else:
             # If not sort is specified just get all recipes
             bucket = Recipe.objects.all()
@@ -30,7 +31,7 @@ class RecipeCollectionView(View):
 
             recipe_dict[key].append(drop)
 
-        return render(request, 'index.html', {'recipes': recipe_dict})
+        return render(request, 'index.html', {'recipes': recipe_dict, 'title': sort})
 
     def post(self, request):
         '''Handles posts of new recipes from a form'''
