@@ -1,0 +1,21 @@
+- model: main.ingredient
+  pk: 1
+  fields:
+    name: Hamburger
+- model: main.ingredient
+  pk: 2
+  fields:
+    name: Taco Seasoning
+- model: main.category
+  pk: 1
+  fields:
+    name: Mexican
+    description: Southern dishes of awesomness
+- model: main.Recipe
+  pk: 1
+  fields:
+    name: Tacos
+    description: Tasty treat
+    directions: mix and eat
+    ingredients: [1, 2]
+    categories: [1]
