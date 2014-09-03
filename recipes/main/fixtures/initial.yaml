@@ -2,20 +2,30 @@
   pk: 1
   fields:
     name: Hamburger
+    unit_of_measure: Pound
+    value_of_measure: 1
 - model: main.ingredient
   pk: 2
   fields:
     name: Taco Seasoning
+    unit_of_measure: Packet
+    value_of_measure: 1
 - model: main.category
   pk: 1
   fields:
     name: Mexican
     description: Southern dishes of awesomness
+- model: main.direction
+  pk: 1
+  fields:
+    step: 1
+    Description: mix and eat
+
 - model: main.Recipe
   pk: 1
   fields:
     name: Tacos
     description: Tasty treat
-    directions: mix and eat
+    directions: [1]
     ingredients: [1, 2]
     categories: [1]
