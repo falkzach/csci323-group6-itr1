@@ -27,7 +27,7 @@ class RecipeCollectionView(View):
             else:
                 return HttpResponse('Would return list of recipes in ordered by category')
         else:
-            return HttpResponse('Would return list of recipes in chronological order')
+            return render(request, 'index.html')
 
     def post(self, request):
         '''Handles posts of new recipes from a form'''
