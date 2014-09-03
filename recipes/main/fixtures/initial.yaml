@@ -14,17 +14,25 @@
   pk: 1
   fields:
     name: Mexican
+    recipes: [1]
     description: Southern dishes of awesomness
 - model: main.direction
   pk: 1
   fields:
     step: 1
-    Description: mix and eat
+    recipe: 1
+    description: mix and eat
 - model: main.Recipe
   pk: 1
   fields:
     name: Tacos
     description: Tasty treat
-    directions: [1]
+    rating: 1
     ingredients: [1, 2]
-    categories: [1]
+- model: main.recipe
+  pk: 2
+  fields:
+    name: Burritto
+    description: another tasty one
+    rating: 2
+    ingredients: [1, 2]
