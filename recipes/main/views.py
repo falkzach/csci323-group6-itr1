@@ -13,21 +13,27 @@ class RecipeCollectionView(View):
         ''' The method is responsible for handling collection get requests'''
         
         resource_dict = {}
+
+        template = 'index.html'
         
         if sort == 'ingredient':
             if pivot:
-                bucket = Ingredient.objects.get(pk=pivot).recipe_set.all()
+                pivot = Ingredient.objects.get(pk=pivot)
+                bucket = pivot.recipe_set.all()
             else:
                 bucket = Ingredient.objects.all()
             
         elif sort == 'category':
             if pivot:
-                bucket = Ingredient.objects.get(pk=pivot).recipe_set.all()
+                pivot = Category.objects.get(pk=pivot)
+                bucket = pivot.recipe_set.all()
             else:
                 bucket = Category.objects.all()
-        else:
-            # If not sort is specified just get all recipes
+        elif sort:
             bucket = Recipe.objects.all()
+        else:
+            pivot = Recipe.objects.get(pk=pivot)
+            template = 'recipe.html'
 
         for drop in bucket:
             
@@ -38,7 +44,7 @@ class RecipeCollectionView(View):
 
             resource_dict[key].append(drop)
 
-        return render(request, 'index.html', {'resource_collection': resource_dict, 'title': sort})
+        return render(request, template, {'resource_collection': resource_dict, 'title': sort, 'pivot': pivot } )
 
     def post(self, request):
         '''Handles posts of new recipes from a form'''
@@ -46,5 +52,5 @@ class RecipeCollectionView(View):
         return HttpResponse('POST /')
 
 class RecipeResourceView(View):
-    def get(self, request, id=None):
-        return HttpResponse('Would return a single recipe object with id %s' % (id))
+    def get(self, request, pivot=None):
+        return HttpResponse('Would return a single recipe object with id %s' % (pivot))

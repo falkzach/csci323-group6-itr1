@@ -3,25 +3,31 @@
 {% block content %}
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<h1>Hello World!</h1>
-			<p>This is an example of how to iterate stuff in templates</p>
+			{% if title == 'category' %}
+			<h1>{{ pivot.name.capitalize|default:"Categories" }}</h1>
+			<p>Listed below are is the collection of recipes related to this category. Click a recipe to view more information.</p>
+			{% elif title == 'ingredient' %}
+			<h1>{{ pivot.name.capitalize|default:"Ingredients" }}</h1>
+			<p>Listed below are is the collection of recipes related to this ingredient. Click a recipe to view more information.</p>
+			{% else %}
+			<h1>Recipes</h1>
+			<p>Listed below is a collection of all recipes</p>
+			{% endif %}
 
-			<pre>{{ resource_collection }}</pre>
-
-			{% for key, resource_list in resource_collection %}
+			{% for key, resource_list in resource_collection.items %}
 			<h2>{{key}}</h2>
 			<table class="table">
-				<tr>
-					<th>Name</th>
-				</tr>
 				{% for resource in resource_list %}
-				<tr>
-					<td>A name should be here that links to resource items.</td>
-				</tr>
+					<tr>
+						{% if pivot or title == 'alphabetical' %}
+							<td><a href="{% url "show_recipe" resource.id %}">{{ resource.name }}</a></td>
+						{% else %}
+							<td><a href="{% url "ingredient_category_sort" title resource.id %}">{{ resource.name }}</a></td>
+						{% endif %}
+					</tr>
 				{% endfor %}
 			</table>
 			{% endfor %}
-
 		</div>
 	</div>
 {% endblock %}
