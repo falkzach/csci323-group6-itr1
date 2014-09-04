@@ -13,8 +13,8 @@ class Recipes(View):
             recipes = Recipe.objects.all()
             return render(request, 'recipes.html', {'recipes':recipes})
         else:
-            recipe = Recipe.objects.get(id=recipe_id).order_by('name')
-            ingredients = Ingredient.objects.filter(recipe__id=recipe_id).order_by('name')
+            recipe = Recipe.objects.get(id=recipe_id)
+            ingredients = Ingredient.objects.filter(recipe__id=recipe_id)
             directions = Direction.objects.filter(recipe__id=recipe_id).order_by('step')
             return render(request, 'recipe.html', {'recipe':recipe,
                                                    'ingredients':ingredients,
@@ -27,8 +27,8 @@ class Category(View):
             return render(request, 'categories.html', {'categories':categories})
         else:
             try:
-                category = Category.objects.get(id=category_id).order_by('name')
-                recipes = Recipe.objects.get(category__id=category_id).order_by('name')
+                category = Category.objects.get(id=category_id)
+                recipes = Recipe.objects.get(category__id=category_id)
                 return render(request, 'category.html', {'category':category,
                                                          'recipes':recipes})
             except:
