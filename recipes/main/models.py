@@ -10,6 +10,13 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
+class Category(models.Model):
+
+    name = models.CharField(max_length=255,)
+    description = models.CharField(max_length=255,)
+
+    def __str__(self):
+        return self.name
 
 class Recipe(models.Model):
 
@@ -18,20 +25,12 @@ class Recipe(models.Model):
     rating = models.IntegerField()
 
     ingredients = models.ManyToManyField(Ingredient)
+    categories = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.name
 
 
-class Category(models.Model):
-
-    name = models.CharField(max_length=255,)
-    description = models.CharField(max_length=255,)
-
-    recipes = models.ManyToManyField(Recipe)
-
-    def __str__(self):
-        return self.name
 
 class Direction(models.Model):
 
