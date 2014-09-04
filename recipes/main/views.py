@@ -9,7 +9,7 @@ from main.models import Recipe, Ingredient, Category
 
 class RecipeCollectionView(View):
 
-    def get(self, request, sort=None, pivot=None):
+    def get(self, request, sort="alphabetical", pivot=None):
         ''' The method is responsible for handling collection get requests'''
         
         resource_dict = {}
@@ -29,11 +29,8 @@ class RecipeCollectionView(View):
                 bucket = pivot.recipe_set.all()
             else:
                 bucket = Category.objects.all()
-        elif sort:
-            bucket = Recipe.objects.all()
         else:
-            pivot = Recipe.objects.get(pk=pivot)
-            template = 'recipe.html'
+            bucket = Recipe.objects.all()
 
         for drop in bucket:
             
