@@ -1,0 +1,26 @@
+{% extends "head.html" %}
+{% block title %}Recipe Search{% endblock %}
+{% block content %}
+        <div class="container">
+            <h1>Recipe Search Results</h1>
+            <table class="table">
+            	<thead>
+            		<tr>
+            			<th>Recipe</th>
+                      	<th>Rating</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		{% for recipe in recipes %}
+            		<tr>
+
+            			<td>{{recipe.name}}</td>
+                        <td>{{recipe.rating}}</td>
+            	      {% endfor %}
+            		</tr>
+            		{% endfor %}
+            	</tbody>
+
+            </table>
+       </div>
+{% endblock %}

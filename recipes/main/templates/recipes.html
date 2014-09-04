@@ -1,13 +1,26 @@
-<html>
+{% extends "head_foot.html" %}
+{% block title %}Recipe Collection{% endblock %}
+{% block content %}
+          <div class="container">
+                <table class="table">
+                      <h1>Recipes</h1>
+                    <thead>
+                        <tr>
+                            <th>Recipe</th>
+                                  <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for recipe in recipes %}
+                        <tr>
 
-<body>
-hello?
+                            <td>{{recipe.name}}</td>
+                            <td>{{recipe.rating}}</td>
 
-<pre>{{ recipes.items }}</pre>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
 
-{% for recipe in recipes.items %}
-{{ recipe.name }}
-{%endfor%}
-
-</body>
-</html>
+                </table>
+          </div>
+{% endblock %}
