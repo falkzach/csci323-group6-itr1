@@ -38,7 +38,9 @@ class RecipeCollectionView(View):
 
             resource_dict[key].append(drop)
 
-        return render(request, 'index.html', {'resource_collection': resource_dict, 'title': sort})
+        football = {'resource_collection': resource_dict, 'title': sort}
+        print(football)
+        return render(request, 'index.html', football)
 
     def post(self, request):
         '''Handles posts of new recipes from a form'''
@@ -48,3 +50,11 @@ class RecipeCollectionView(View):
 class RecipeResourceView(View):
     def get(self, request, id=None):
         return HttpResponse('Would return a single recipe object with id %s' % (id))
+
+class Recipes(View):
+    def get(self, request, id=None):
+        recipes = Recipe.objects.all()
+        bob = "hi"
+        print(bob)
+        print (recipes)
+        return render(request, 'recipes.html', recipes)
