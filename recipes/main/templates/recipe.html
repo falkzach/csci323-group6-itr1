@@ -1,27 +1,44 @@
-{% extends "head.html" %}
+{% extends "head_foot.html" %}
 {% block title %}Recipe Collection{% endblock %}
 {% block content %}
         <div class="container">
             <h1>{{recipe.name}}</h1>
           	<br/>
-          	<h2>ingredients</h2>
+          	<h2>Ingredients</h2>
 	            <table class="table">
 	            	<thead>
 	            		<tr>
-	            			<th>Recipe</th>
+	            			<th>Ingredient</th>
 	                        <th>Amount</th>
 	            		</tr>
 	            	</thead>
 	            	<tbody>
-	            		{% for ingredient in recipe.ingredients %}
+	            		{% for ingredient in ingredients %}
 	            		<tr>
-
 	            			<td>{{ingredient.name}}</td>
                             <td>{{ingredient.value_of_measure}} {{ingredient.unit_of_measure}}</td>
-	            			{% endfor %}
 	            		</tr>
 	            		{% endfor %}
 	            	</tbody>
                 </table>
+
+            <br/>
+
+            <h2>Rating</h2>
+            <p>{{recipe.rating}}</p>
+
+            <br/>
+
+            <h2>Directions</h2>
+            <ul>
+                {% for direction in directions %}
+                <li>{{direction.description}}</li>
+
+                {% endfor %}
+            </ul>
+
+            <br/>
+
+
         </div>
 {% endblock %}
