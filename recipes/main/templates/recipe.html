@@ -15,7 +15,7 @@
 	            	<tbody>
 	            		{% for ingredient in ingredients %}
 	            		<tr>
-	            			<td>{{ingredient.name}}</td>
+	            			<td><a href={%url 'ingredient' ingredient_id=ingredient.id%}>{{ingredient.name}}</a></td>
                             <td>{{ingredient.value_of_measure}} {{ingredient.unit_of_measure}}</td>
 	            		</tr>
 	            		{% endfor %}
