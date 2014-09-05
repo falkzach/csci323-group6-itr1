@@ -27,8 +27,8 @@
 	        <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
 	            <li class="{% active request "^/recipes/[0-9]+$" %}"><a href={%url 'recipes' %}>Recipes</a></li>
-	            <li><a href={%url 'categories'%}>Categories</a></li>
-	            <li><a href={%url 'ingredients'%}>Ingredients</a></li>
+	            <li class="{% active request "^/categories/[0-9]+$" %}"><a href={%url 'categories'%}>Categories</a></li>
+	            <li class="{% active request "^/ingredients/[0-9]+$" %}"><a href={%url 'ingredients'%}>Ingredients</a></li>
 	            <li><a href={%url 'admin:index'%}>Admin</a></li>
 	          </ul>
 		  <form class="navbar-form navbar-right" action="{% url "search" %}" role="search">
