@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load tags %}
 <html>
 
 	<head>
@@ -25,7 +26,7 @@
 	        </div>
 	        <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
-	            <li class="active"><a href={%url 'recipes' %}>Recipes</a></li>
+	            <li class="{% active request "^/recipes/[0-9]+$" %}"><a href={%url 'recipes' %}>Recipes</a></li>
 	            <li><a href={%url 'categories'%}>Categories</a></li>
 	            <li><a href={%url 'ingredients'%}>Ingredients</a></li>
 	            <li><a href={%url 'admin:index'%}>Admin</a></li>
