@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load tags %}
+<html>
+
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+	    <!-- <link rel="icon" href="../../favicon.ico"> -->
+	</head>
+	 <body>
+
+	    <!-- Fixed navbar -->
+	    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">Group 6 Recipe Book of Awesomeness</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li class="{% active request "^/recipes" %}"><a href={%url 'recipes' %}>Recipes</a></li>
+	            <li class="{% active request "^/categories" %}"><a href={%url 'categories'%}>Categories</a></li>
+	            <li class="{% active request "^/ingredients" %}"><a href={%url 'ingredients'%}>Ingredients</a></li>
+	            <li><a href={%url 'admin:index'%}>Admin</a></li>
+	          </ul>
+		  <form class="navbar-form navbar-right" action="{% url "search" %}" role="search">
+			  <div class="form-group">
+				  <input type="text" name="terms" class="form-control" placeholder="Recipe Keywords">
+			  </div>
+			  <button type="submit" class="btn btn-default">Search</button>
+		  </form>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </div>
+
+	    <br/>
+	    <br/>
+	    <!-- odd issue with navbar covering next component -->
+
+
+	    <!-- Main jumbotron for a primary marketing message or call to action -->
+	    <div class="jumbotron">
+	      <div class="container">
+	        <h1>Group 6 has a pretty cool Recipe Book</h1>
+	        <p>but we need some better recipes!</p>
+	      </div>
+	    </div>
+
+        {% block content %}{% endblock %}
+            <hr>
+
+	      <footer>
+	        <p>&copy; Group6FTW 2014</p>
+	      </footer>
+	    </div> <!-- /container -->
+    </body>
+
+
+	<!-- jquery -->
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+</html>

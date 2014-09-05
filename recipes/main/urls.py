@@ -1,12 +1,16 @@
 from django.conf.urls import url
 
-from main.views import RecipeCollectionView, RecipeResourceView
+from main.views import Recipes, Categories, Ingredients, Search
 
 urlpatterns = [
-        url(r'^$', RecipeCollectionView.as_view()),
-        url(r'^(?P<id>[0-9]+)$', RecipeResourceView.as_view()),
-        url(r'^(?P<sort>alphabetical)$', RecipeCollectionView.as_view(), name="alphabetical_list"),
-        url(r'^(?P<sort>alphabetical)/(?P<pivot>[a-zA-Z])$', RecipeCollectionView.as_view()),
-        url(r'^(?P<sort>ingredient|category)$', RecipeCollectionView.as_view(), name="ingredient_category_sort"),
-        url(r'^(?P<sort>ingredient|category)/(?P<pivot>[0-9]+)$', RecipeCollectionView.as_view()),
+        url(r'^$', Recipes.as_view()),
+        url(r'^search', Search.as_view(), name="search"),
+        url(r'^recipes$', Recipes.as_view(), name="recipes"),
+        url(r'^recipes/(?P<recipe_id>[0-9]+)$', Recipes.as_view(), name="recipe"),
+        url(r'^categories$', Categories.as_view(), name="categories"),
+        url(r'^categories/(?P<category_id>[0-9]+)$', Categories.as_view(), name="category"),
+        url(r'^ingredients$', Ingredients.as_view(), name="ingredients"),
+        url(r'^ingredients/(?P<ingredient_id>[0-9]+)$', Ingredients.as_view(), name="ingredient"),
+
+
 ]

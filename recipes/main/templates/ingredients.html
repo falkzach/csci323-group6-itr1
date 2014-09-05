@@ -1,0 +1,24 @@
+{% extends "head_foot.html" %}
+{% block title %}Categories{% endblock %}
+{% block content %}
+        <div class="container">
+            <h1>Ingredients</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ingredient</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ingredient in ingredients %}
+                    <tr>
+
+                        <td><a href={%url 'ingredient' ingredient_id=ingredient.id%}>{{ingredient.name}}</a></td>
+                        <td>{{ingredient.value_of_measure}} {{ingredient.unit_of_measure}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock %}

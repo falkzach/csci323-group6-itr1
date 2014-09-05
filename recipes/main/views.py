@@ -1,50 +1,65 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseNotFound
+
+
+
+from django.template import RequestContext
+
 
 from django.views.generic.base import View
 
-from main.models import Recipe, Ingredient, Category
+from main.models import Recipe, Ingredient, Category, Direction
 
-# Create your views here.
-
-class RecipeCollectionView(View):
-
-    def get(self, request, sort=None, pivot=None):
-        ''' The method is responsible for handling collection get requests'''
-        
-        resource_dict = {}
-        
-        if sort == 'ingredient':
-            if pivot:
-                bucket = Ingredient.objects.get(pk=pivot).recipe_set.all()
-            else:
-                bucket = Ingredient.objects.all()
-            
-        elif sort == 'category':
-            if pivot:
-                bucket = Ingredient.objects.get(pk=pivot).recipe_set.all()
-            else:
-                bucket = Category.objects.all()
+class Recipes(View):
+    def get(self, request, recipe_id=None):
+        if recipe_id is None:
+            recipes = Recipe.objects.all().order_by('name')
+            return render(request, 'recipes.html', {'recipes':recipes}, context_instance=RequestContext(request))
         else:
-            # If not sort is specified just get all recipes
-            bucket = Recipe.objects.all()
+            recipe = Recipe.objects.get(id=recipe_id)
+            ingredients = Ingredient.objects.filter(recipe__id=recipe_id)
+            directions = Direction.objects.filter(recipe__id=recipe_id).order_by('step')
+            categories = Category.objects.all().filter(recipes__id=recipe_id)
+            return render(request, 'recipe.html', {'recipe': recipe,
+                                                   'ingredients': ingredients,
+                                                   'directions': directions,
+                                                   'categories': categories}, context_instance=RequestContext(request))
 
-        for drop in bucket:
-            
-            key = drop.name.upper()[0]
+class Categories(View):
+    def get(self, request, category_id=None):
+        if category_id is None:
+            categories = Category.objects.all()
+            return render(request, 'categories.html', {'categories': categories}, context_instance=RequestContext(request))
+        else:
+            category = Category.objects.get(id=category_id)
+            recipes = Recipe.objects.all().filter(category__id=category_id)
+            return render(request, 'category.html', {'category': category,
+                                                     'recipes': recipes}, context_instance=RequestContext(request))
 
-            if key not in resource_dict:
-                resource_dict[key] = list()
+class Ingredients(View):
+    def get(self, request, ingredient_id=None):
+        if ingredient_id is None:
+            ingredients = Ingredient.objects.all()
+            return render(request, 'ingredients.html', {'ingredients' : ingredients}, context_instance=RequestContext(request))
+        else:
+            ingredient = Ingredient.objects.get(id=ingredient_id)
+            recipes = Recipe.objects.all().filter(ingredients__id=ingredient_id)
+            return render(request, 'ingredient.html', {'ingredient': ingredient,
+                                                       'recipes': recipes}, context_instance=RequestContext(request))
 
-            resource_dict[key].append(drop)
+class Search(View):
+    def get(self, request):
 
-        return render(request, 'index.html', {'resource_collection': resource_dict, 'title': sort})
+        recipes     = []
+        ingredients = []
+        categories  = []
 
-    def post(self, request):
-        '''Handles posts of new recipes from a form'''
+        if request.GET['terms']:
+            for term in request.GET['terms'].split(' '):
 
-        return HttpResponse('POST /')
 
-class RecipeResourceView(View):
-    def get(self, request, id=None):
-        return HttpResponse('Would return a single recipe object with id %s' % (id))
+                  recipes = recipes + list(Recipe.objects.filter(Q(name__icontains=term) | Q(description__icontains=term)))
+                  ingredients = ingredients + list(Ingredient.objects.filter(Q(name__icontains=term)))
+
+        return render(request, 'search.html', {'recipes': recipes, 'ingredients':ingredients})
