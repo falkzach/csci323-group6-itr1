@@ -2,9 +2,10 @@
 {% block title %}Recipe Collection{% endblock %}
 {% block content %}
         <div class="container">
-            <h1>{{recipe.name}}</h1>
+            <h1>Recipe:</h1>
+            <h2>{{recipe.name}}</h2>
           	<br/>
-          	<h2>Ingredients</h2>
+          	<h3>Ingredients</h3>
 	            <table class="table">
 	            	<thead>
 	            		<tr>
@@ -24,12 +25,12 @@
 
             <br/>
 
-            <h2>Rating</h2>
+            <h3>Rating</h3>
             <p>{{recipe.rating}}</p>
 
             <br/>
 
-            <h2>Directions</h2>
+            <h3>Directions</h3>
             <ul>
                 {% for direction in directions %}
                 <li>{{direction.description}}</li>
@@ -39,7 +40,7 @@
 
             <br/>
 
-            <h2>Categories</h2>
+            <h3>Categories</h3>
 
             <table class="table">
                 <thead>
