@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
-<<<<<<< HEAD
 
-from django.db.models import Q
-=======
+
+
 from django.template import RequestContext
->>>>>>> wired but odd error
+
 
 from django.views.generic.base import View
 
