@@ -16,20 +16,19 @@ class Recipes(View):
             recipe = Recipe.objects.get(id=recipe_id)
             ingredients = Ingredient.objects.filter(recipe__id=recipe_id)
             directions = Direction.objects.filter(recipe__id=recipe_id).order_by('step')
-            return render(request, 'recipe.html', {'recipe':recipe,
-                                                   'ingredients':ingredients,
-                                                   'directions':directions})
+            categories = Category.objects.all().filter(recipes__id=recipe_id)
+            return render(request, 'recipe.html', {'recipe' : recipe,
+                                                   'ingredients' : ingredients,
+                                                   'directions' : directions,
+                                                   'categories' : categories})
 
-class Category(View):
+class Categories(View):
     def get(self, request, category_id=None):
         if category_id is None:
             categories = Category.objects.all()
             return render(request, 'categories.html', {'categories':categories})
         else:
-            try:
-                category = Category.objects.get(id=category_id)
-                recipes = Recipe.objects.get(category__id=category_id)
-                return render(request, 'category.html', {'category':category,
-                                                         'recipes':recipes})
-            except:
-                return HttpResponseNotFound('<h1>Page not found</h1>')
+            category = Category.objects.get(id=category_id)
+            recipes = Recipe.objects.all().filter(category__id=category_id)
+            return render(request, 'category.html', {'category':category,
+                                                     'recipes':recipes})
