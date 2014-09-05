@@ -1,9 +1,10 @@
 from django.conf.urls import url
 
-from main.views import Recipes, Categories, Ingredients
+from main.views import Recipes, Categories, Ingredients, Search
 
 urlpatterns = [
         url(r'^$', Recipes.as_view()),
+        url(r'^search', Search.as_view(), name="search"),
         url(r'^recipes$', Recipes.as_view(), name="recipes"),
         url(r'^recipes/(?P<recipe_id>[0-9]+)$', Recipes.as_view(), name="recipe"),
         url(r'^categories$', Categories.as_view(), name="categories"),

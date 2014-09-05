@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 
+from django.db.models import Q
 
 from django.views.generic.base import View
 
@@ -43,3 +44,19 @@ class Ingredients(View):
             recipes = Recipe.objects.all().filter(ingredients__id=ingredient_id)
             return render(request, 'ingredient.html', {'ingredient': ingredient,
                                                        'recipes': recipes})
+
+class Search(View):
+    def get(self, request):
+
+        recipes     = []
+        ingredients = []
+        categories  = []
+
+        if request.GET['terms']:
+            for term in request.GET['terms'].split(' '):
+
+
+                  recipes = recipes + list(Recipe.objects.filter(Q(name__icontains=term) | Q(description__icontains=term)))
+                  ingredients = ingredients + list(Ingredient.objects.filter(Q(name__icontains=term)))
+
+        return render(request, 'search.html', {'recipes': recipes, 'ingredients':ingredients})

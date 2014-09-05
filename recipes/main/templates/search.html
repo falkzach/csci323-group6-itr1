@@ -1,25 +1,49 @@
-{% extends "head.html" %}
+{% extends "head_foot.html" %}
 {% block title %}Recipe Search{% endblock %}
 {% block content %}
         <div class="container">
-            <h1>Recipe Search Results</h1>
+	    {% if not recipes and not ingredients %}
+		<h1>Your search did not return any results</h1>
+	    {% endif %}
+	    {% if recipes %}
+            <h1>Recipe Results</h1>
             <table class="table">
             	<thead>
             		<tr>
-            			<th>Recipe</th>
-                      	<th>Rating</th>
+            			<th>Recipe Name </th>
+				<th>Rating</th>
             		</tr>
             	</thead>
             	<tbody>
             		{% for recipe in recipes %}
             		<tr>
 
-            			<td>{{recipe.name}}</td>
-                        <td>{{recipe.rating}}</td>
+				<td><a href="{% url "recipe" recipe.id %}">{{recipe.name}}</a></td>
+				<td>{{recipe.rating}}</td>
             		</tr>
             		{% endfor %}
             	</tbody>
 
             </table>
+	    {% endif %}
+	    {% if ingredients %}
+            <h1>Ingredient Results</h1>
+            <table class="table">
+            	<thead>
+            		<tr>
+            			<th>Ingredient Name</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		{% for ingredient in ingredients %}
+            		<tr>
+
+				<td><a href="{% url "ingredient" ingredient.id %}">{{ingredient.name}}</a></td>
+            		</tr>
+            		{% endfor %}
+            	</tbody>
+
+            </table>
+	    {% endif %}
        </div>
 {% endblock %}
